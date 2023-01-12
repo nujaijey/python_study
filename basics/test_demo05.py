@@ -29,16 +29,20 @@ class TestDome05:
     }
 
     def test_add_and_record(self):
+        self.logger.info("请求数据：" + str(self.add_data))
         add_res = requests.request(method='post', url=self.base_url + '/adb/promotionData/saveRecord',
                                    headers=self.headers,
                                    json=self.add_data)
         add_result_json = add_res.json()
+        self.logger.info("响应数据：" + str(add_result_json))
         assert add_result_json['code'] == 0
         assert add_result_json['message'] == 'success'
+        self.logger.info("请求数据：" + str(self.search_data))
         search_res = requests.request(method='post',
                                       url=self.base_url + '/adb/promotionData/promotionUrlClickRecordList',
                                       headers=self.headers, json=self.search_data)
         search_result_json = search_res.json()
+        self.logger.info("响应数据：" + str(search_result_json))
         assert search_result_json['code'] == 0
         assert search_result_json['message'] == 'success'
         assert self.add_data['channelSource'].split('_')[1] in search_result_json['data']['records'][0]['urlUserInfo']
