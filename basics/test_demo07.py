@@ -15,11 +15,36 @@ from basics.utils.database_config import database_config
 
 class TestDome07:
     logger = LoggerUtils.getLogger('testdemo', 'logs')
-    base_url = 'https://day.manage.qxdaojia.com/api'
-    authorization = 'Bearer 1b897654-aaf0-48cd-b25b-cb681f906284'
-    headers = {
-        'authorization': authorization
+    client_host = 'https://day.m.qxdaojia.com/api'
+    backend_host = 'https://day.manage.qxdaojia.com/api'
+    headers = ''
+
+    login_data = {
+        "mobile": "13226645549",
+        "verifyCode": "11111",
+        "type": "login",
+        "thirdType": 3,
+        "isShare": "",
+        "cityCode": "4403",
+        "cityName": "深圳市",
+        "activeSource": "H5",
+        "sign_params": "APP_ID=1577498216199&TIMESTAMP=20230114113438&SIGN_TYPE=SHA256&NONCE=60pqpnluw8e&SIGN=0F8B2B170C7627553914833B889CC1292DE7395E4CC44688BCE2A5150BB1DFF2"
     }
+
+    def setup_class(self):
+        """
+        类前置
+        """
+        self.logger.info("请求数据：" + str(self.login_data))
+        res = requests.request(method='post', url=self.client_host + '/malluser/user/verify/validateCode',
+                               json=self.login_data)
+        result_json = res.json()
+        self.logger.info("响应数据：" + str(result_json))
+        access_token = result_json['data']['access_token']
+        self.headers = {
+            'cookie': 'token=' + access_token,
+            'authorization': 'Bearer ' + access_token
+        }
 
     add_data = {
         "channelSource": "weixin_8000262_1_1_0_0_967026704323182592",
@@ -32,7 +57,7 @@ class TestDome07:
 
     def test_add_and_record(self):
         self.logger.info("请求数据：" + str(self.add_data))
-        add_res = requests.request(method='post', url=self.base_url + '/adb/promotionData/saveRecord',
+        add_res = requests.request(method='post', url=self.backend_host + '/adb/promotionData/saveRecord',
                                    headers=self.headers,
                                    json=self.add_data)
         add_result_json = add_res.json()
