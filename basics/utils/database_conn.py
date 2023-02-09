@@ -8,6 +8,7 @@
 
 import pymysql
 
+
 class DatabaseConn:
     conn = ''
     cursor = ''

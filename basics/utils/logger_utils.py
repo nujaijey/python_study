@@ -12,6 +12,7 @@ import sys
 import time
 from logging.handlers import TimedRotatingFileHandler
 
+
 # from jsonpath import jsonpath
 
 
@@ -25,6 +26,8 @@ class LoggerUtils:
     @classmethod
     def getLogger(cls, name, package_name):
         logger = logging.getLogger(name)
+        if logger.handlers:
+            return logger
         logger.setLevel(logging.DEBUG)
         time_formator = '%Y%m%d'
         now_string = time.strftime(time_formator, time.localtime(time.time()))

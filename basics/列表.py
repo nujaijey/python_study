@@ -53,3 +53,24 @@ print(li)
 # 降序排序：sort(reverse=True)
 li.sort(reverse=True)
 print(li)
+
+# 列表去重
+# 首先转换成集合
+a = [1, 2, 3, 45, 23, 1, 23]
+m = set(a)
+print(m)
+print(type(m))
+# 再从集合转换成列表
+x = [i for i in m]
+print(x)
+print(type(x))
+
+# 冒泡排序
+a = [1, 6, 4, 2, 67, 32]
+l = len(a)  # 6
+for i in range(l):  # 0 1 ...
+    for j in range(l - 1):  # 0 1 ...
+        if a[l - j - 1] < a[l - j - 2]:  # 5,4 4,3 ...
+            a[l - j - 1], a[l - j - 2] = a[l - j - 2], a[l - j - 1]
+for i in range(l):
+    print(a[i])

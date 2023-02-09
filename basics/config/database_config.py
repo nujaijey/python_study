@@ -3,7 +3,7 @@
 # @Time    : 2023/2/6 21:07
 # @Author  : nujaijey
 # @File    : database_config.py
-# @Desc    :
+# @Desc    : 数据库连接配置
 
 database_config = {
     'host': '172.18.186.253',
