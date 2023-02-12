@@ -11,9 +11,10 @@ from basics.config.requests_config import requests_config
 
 class Login:
     logger = LoggerUtils.getLogger('testdemo', 'logs')
-    headers = ''
+    client_headers = ''
+    backend_headers = ''
 
-    login_data = {
+    client_login_data = {
         "mobile": "13226645549",
         "verifyCode": "11111",
         "type": "login",
@@ -25,13 +26,37 @@ class Login:
         "sign_params": "APP_ID=1577498216199&TIMESTAMP=20230114113438&SIGN_TYPE=SHA256&NONCE=60pqpnluw8e&SIGN=0F8B2B170C7627553914833B889CC1292DE7395E4CC44688BCE2A5150BB1DFF2"
     }
 
-    def __init__(self):
-        self.headers = self.login()
+    backend_login_data = {
+        "username": (None, "yejiajun"),
+        "password": (None, "123456"),
+        "APP_ID": (None, "1552274783265"),
+        "TIMESTAMP": (None, "20230212151345"),
+        "SIGN_TYPE": (None, "SHA256"),
+        "NONCE": (None, "j5jwcb38gb"),
+        "SIGN": (None, "9D4CE0D9F3345667EDB6573B16BFF6F08B53465019554B8AA9D89191D183C77C")
+    }
 
-    def login(self):
-        self.logger.info("请求数据：" + str(self.login_data))
+    def __init__(self):
+        self.client_headers = self.client_login()
+        self.backend_headers = self.backend_login()
+
+    def client_login(self):
+        self.logger.info("请求数据：" + str(self.client_login_data))
         res = requests.request(method='post', url=requests_config['client_host'] + '/malluser/user/verify/validateCode',
-                               json=self.login_data)
+                               json=self.client_login_data)
+        result_json = res.json()
+        self.logger.info("响应数据：" + str(result_json))
+        access_token = result_json['data']['access_token']
+        return {
+            'cookie': 'token=' + access_token,
+            'authorization': 'Bearer ' + access_token
+        }
+
+    def backend_login(self):
+        self.logger.info("请求数据：" + str(self.backend_login_data))
+        res = requests.request(method='post',
+                               url=requests_config['backend_host'] + '/user/admin/login/token',
+                               files=self.backend_login_data)
         result_json = res.json()
         self.logger.info("响应数据：" + str(result_json))
         access_token = result_json['data']['access_token']

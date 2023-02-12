@@ -10,10 +10,12 @@ from basics.utils.logger_utils import LoggerUtils
 
 class TestBase:
     logger = LoggerUtils.getLogger('testdemo', 'logs')
-    headers = ''
+    client_headers = ''
+    backend_headers = ''
 
     def setup_class(self):
         """
         类前置
         """
-        self.headers = Login().headers
+        self.client_headers = Login().client_headers
+        self.backend_headers = Login().backend_headers

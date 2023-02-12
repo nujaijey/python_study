@@ -30,7 +30,7 @@ class TestDome07(TestBase):
     def test_add_and_record(self):
         self.logger.info("请求数据：" + str(self.add_data))
         add_res = requests.request(method='post', url=self.backend_host + '/adb/promotionData/saveRecord',
-                                   headers=self.headers,
+                                   headers=self.client_headers,
                                    json=self.add_data)
         add_result_json = add_res.json()
         self.logger.info("响应数据：" + str(add_result_json))
