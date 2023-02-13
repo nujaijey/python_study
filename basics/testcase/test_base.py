@@ -4,7 +4,7 @@
 # @Author  : nujaijey
 # @File    : test_base.py
 # @Desc    :
-from basics.login import Login
+from basics.testcase.login import Login
 from basics.utils.logger_utils import LoggerUtils
 
 

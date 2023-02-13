@@ -8,9 +8,7 @@
 
 import requests
 
-from basics.test_base import TestBase
-from basics.utils.database_conn import DatabaseConn
-from basics.config.database_config import database_config
+from basics.testcase.test_base import TestBase
 from basics.config.requests_config import requests_config
 
 

@@ -5,6 +5,7 @@
 # @File    : test.py
 # @Desc    :
 import pytest
+import yaml
 
 
 class TestDemo:
@@ -103,6 +104,6 @@ class TestBaseArea(TestBase):
 
 
 if __name__ == '__main__':
-    pytest.main(["test_add_area.py", "-v", "-s"])
-
+    # pytest.main(["test_add_area.py", "-v", "-s"])
+    pass
 # requests.request(method=method, url=self.base_uri + url, headers=self.headers, **kwargs)
