@@ -1,0 +1,46 @@
+member_data:
+  - 'desc': '数据1'
+    'data':
+        'accountName': ${random(5)}
+        'name': ''
+        'phone': '13200000022'
+        'identityNo': '440111199507122222'
+        'bankNo': '88888'
+        'accountBankName': ${random(5)}
+        'accountBankAddress': ${random(5)}
+        'memberRole': 6
+        ‘specialInstructions': ''
+        'teamId': '135'
+    'expect':
+        'code': 0
+        'message': 'success'
+  - 'desc': '数据2'
+    'data':
+        'accountName': ${random(5)}
+        'name': ''
+        'phone': '13200000023'
+        'identityNo': '440111199507122222'
+        'bankNo': '99999'
+        'accountBankName': ${random(5)}
+        'accountBankAddress': ${random(5)}
+        'memberRole': 6
+        ‘specialInstructions': ''
+        'teamId': '135'
+    'expect':
+        'code': 0
+        'message': 'success'
+
+search_data:
+  - 'desc': '数据查询'
+    'data':
+        'page': 1
+        'limit': 10
+        'level': 2
+        'APP_ID': '1552274783265'
+        'TIMESTAMP': '20230212152028'
+        'SIGN_TYPE': 'SHA256'
+        'NONCE': 'gdnm3yezflu'
+        'SIGN': 'A94684CD93F3F1419B8334CFF122E0B86EE10412B288E4BF3F5ADB0344B0D6E3'
+    'expect':
+        'code': 0
+        'message': 'success'
