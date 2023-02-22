@@ -1,0 +1,29 @@
+add_data:
+  success:
+    - 'desc': '验证分类名称'
+      'data':
+          'scName': ye${random(5)}
+          'scSort': 1
+          'scStatus': null
+    - 'desc': '验证排序'
+      'data':
+        'scName': ye${random(5)}
+        'scSort': 2
+        'scStatus': null
+
+#search_data:
+#  success:
+#    - 'desc': '默认无条件查询'
+#      'data':
+#          'scName': ''
+#          'scSort': null
+#          'scStatus': null
+#          'limit': 10
+#          'page': 1
+#    - 'desc': '名称查询'
+#       'data':
+#          'scName': 'ye'
+#          'scSort': null
+#          'scStatus': null
+#          'limit': 10
+#          'page': 1

@@ -1,0 +1,27 @@
+add_data:
+  - 'desc': '新增数据-8000262-659108'
+    'data':
+        'channelSource': 'weixin_8000262_1_1_0_0_967026704323182592'
+        'urlId': '967026704323182592'
+        'userId': '659108'
+    'expect':
+        'code': 0
+        'message': 'success'
+  - 'desc': '新增数据-194985640-1012757395861929984'
+    'data':
+        'channelSource': 'paipaiGiftCoupon_194985640_0_0_0_219_994647152288333824'
+        'urlId': '994647152288333824'
+        'userId': '1012757395861929984'
+    'expect':
+        'code': 0
+        'message': 'success'
+
+search_data:
+  - 'desc': '查询数据'
+    'data':
+        'userId': ''
+        'limit': 10
+        'page': 1
+    'expect':
+        'code': 0
+        'message': 'success'

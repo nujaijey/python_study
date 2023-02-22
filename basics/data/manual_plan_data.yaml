@@ -1,0 +1,205 @@
+add_plan:
+  success:
+    - name: chnjx${random(5)}
+      duration: 1
+      operatorId: "2186"
+      projectCode: "99998888"
+
+  fail:
+    - desc: 名称超过15个字符
+      data:
+        name: chnjx${random(11)}
+        duration: 1
+        operatorId: "2186"
+        projectCode: "99998888"
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 名称为空
+      data:
+        name: ''
+        duration: 1
+        operatorId: "2186"
+        projectCode: "99998888"
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 重名验证
+      data:
+        name: name
+        duration: 1
+        operatorId: "2186"
+        projectCode: "99998888"
+      expect:
+        code: 500
+        message: '采样计划名称已存在'
+    - desc: 采样时长为0
+      data:
+        name: chnjx${random(5)}
+        duration: 0
+        operatorId: "2186"
+        projectCode: "99998888"
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 采样时长为负数
+      data:
+        name: chnjx${random(5)}
+        duration: -1
+        operatorId: "2186"
+        projectCode: "99998888"
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 采样时长超过1000
+      data:
+        name: chnjx${random(5)}
+        duration: 1001
+        operatorId: "2186"
+        projectCode: "99998888"
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 采样人员为空
+      data:
+        name: chnjx${random(5)}
+        duration: 1001
+        operatorId: ""
+        projectCode: "99998888"
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 采样人员不存在
+      data:
+        name: chnjx${random(5)}
+        duration: 1000
+        operatorId: ""
+        projectCode: "99998888"
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 对象id为空
+      data:
+        name: chnjx${random(5)}
+        duration: 1
+        operatorId: "2186"
+        projectCode: "99998888"
+        relatedIds: [ ]
+      expect:
+        code: 1001
+        message: '请求参数错误'
+    - desc: 业务类型为空
+      data:
+        name: chnjx${random(5)}
+        duration: 1
+        operatorId: "2186"
+        projectCode: "99998888"
+        business_type: [ ]
+      expect:
+        code: 1001
+        message: '请求参数错误'
+plan_list:
+  success:
+    - desc: 不传任何查询条件
+
+    - desc: 根据项目编码查询
+      org_code: "99998888"
+
+    - desc: 查询保洁业务类型计划
+      business_type: 1
+
+    - desc: 查询绿化业务类型计划
+      business_type: 2
+
+    - desc: 查询绿化业务类型计划
+      business_type: 2
+
+    - desc: 根据采样人员模糊查询
+      operator_name: 乒
+
+    - desc: 根据采样人名称完全匹配查询
+      operator_name: 乒乓球
+
+    - desc: 根据计划名称模糊匹配
+      name: chnjx
+
+    - desc: 查询正常状态列表
+      status: 1
+
+    - desc: 查询停用状态列表
+      status: 2
+
+    - desc: 组合查询
+      org_code: "99998888"
+      business_type: 1
+      operator_name: 乒乓球
+      name: chnjx
+      status: 1
+select_object:
+  success:
+    - desc: 不传任何查询条件
+      project_code: "99998888"
+
+    - desc: 根据对象名称进行过滤
+      project_code: "99998888"
+      name: name
+
+    - desc: 根据区域名称进行过滤
+      project_code: "99998888"
+      zone: chnjx
+
+    - desc: 查询1级对象
+      project_code: "99998888"
+      grade: 1
+
+    - desc: 查询2级对象
+      project_code: "99998888"
+      grade: 2
+
+    - desc: 查询3级对象
+      project_code: "99998888"
+      grade: 3
+
+    - desc: 根据大类名称进行查询
+      project_code: "99998888"
+      big_cate: chnjx
+
+    - desc: 根据小类名称进行查询
+      project_code: "99998888"
+      small_cate: chnjx
+
+    - desc: 根据小类名称进行查询
+      project_code: "99998888"
+      object_type: object_type
+
+    - desc: 根据小类名称进行查询
+      project_code: "99998888"
+      point_type: point_type
+
+    - desc: 根据点位进行查询
+      project_code: "99998888"
+      point: point
+
+    - desc: 查询保洁对象
+      project_code: "99998888"
+      business_type: 1
+
+    - desc: 查询绿化对象
+      project_code: "99998888"
+      business_type: 1
+
+    - desc: 查询第二页数据
+      project_code: "99998888"
+      page: 2
+
+    - desc: 组合查询
+      project_code: "99998888"
+      name: name
+      zone: chnjx
+      grade: 1
+      big_cate: chnjx
+      small_cate: chnjx
+      object_type: object_type
+      point_type: point_type
+      point: point
+      business_type: 2

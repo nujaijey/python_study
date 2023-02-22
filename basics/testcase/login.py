@@ -41,11 +41,11 @@ class Login:
         self.backend_headers = self.backend_login()
 
     def client_login(self):
-        self.logger.info("请求数据：" + str(self.client_login_data))
+        self.logger.info("客户端登录请求数据：" + str(self.client_login_data))
         res = requests.request(method='post', url=requests_config['client_host'] + '/malluser/user/verify/validateCode',
                                json=self.client_login_data)
         result_json = res.json()
-        self.logger.info("响应数据：" + str(result_json))
+        self.logger.info("客户端登录响应数据：" + str(result_json))
         access_token = result_json['data']['access_token']
         return {
             'cookie': 'token=' + access_token,
@@ -53,12 +53,12 @@ class Login:
         }
 
     def backend_login(self):
-        self.logger.info("请求数据：" + str(self.backend_login_data))
+        self.logger.info("后台登录请求数据：" + str(self.backend_login_data))
         res = requests.request(method='post',
                                url=requests_config['backend_host'] + '/user/admin/login/token',
                                files=self.backend_login_data)
         result_json = res.json()
-        self.logger.info("响应数据：" + str(result_json))
+        self.logger.info("后台登录响应数据：" + str(result_json))
         access_token = result_json['data']['access_token']
         return {
             'cookie': 'token=' + access_token,
