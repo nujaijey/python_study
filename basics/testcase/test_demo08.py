@@ -1,7 +1,7 @@
 import pytest
 import requests
 import yaml
-
+from copy import deepcopy
 from basics.testcase.test_base import TestBase
 from basics.config.requests_config import requests_config
 from basics.utils.logger_utils import LoggerUtils
@@ -19,8 +19,7 @@ class TestDome08(TestBase):
         open(r'D:\PycharmProjects\python_study\basics\data\member_data.yaml', encoding='utf-8'))['search_data'])
     def test_join_success(self, member_data, search_data):
         # 如果不想修改源数据的话，可以定义一个运行数据来承接，修改时修改运行数据
-        # run_data = {}
-        # run_data.update(member_data)
+        # run_data = deepcopy(member_data)
         # run_data['data']['name'] = run_data['data']['accountName']
         self.replace_formal_dict_2_actual(member_data)
         member_data['data']['name'] = member_data['data']['accountName']
