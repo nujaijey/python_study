@@ -45,3 +45,29 @@ class SubjectCategory(ApiBase):
                 'page': page
             }
         }
+        return self.req(**request_data)
+
+    def edit(self, id, scName, scSort, scStatus):
+        request_data = {
+            'method': 'post',
+            'url': self.backend_host + '/finance/subjectClassification/addOrUpdate',
+            'headers': self.backend_headers,
+            'json': {
+                'id': id,
+                'scName': scName,
+                'scSort': scSort,
+                'scStatus': scStatus,
+            }
+        }
+        return self.req(**request_data)
+
+    def log(self, id):
+        request_data = {
+            'method': 'post',
+            'url': self.backend_host + '/elastic/log/listLogById',
+            'headers': self.backend_headers,
+            'json': {
+                'id': id
+            }
+        }
+        return self.req(**request_data)
