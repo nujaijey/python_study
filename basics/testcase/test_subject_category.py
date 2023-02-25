@@ -27,24 +27,24 @@ class TestSubjectCategory(TestBase):
     #     self.logger.info("新增响应数据：" + str(add_result_json))
     #     assert add_result_json['code'] == 0
     #     assert add_result_json['message'] == 'success'
-    #     search_data = {
+    #     add_search_data = {
     #                                       'scName': add_success_data['data']['scName'],
     #                                       'scSort': None,
     #                                       'scStatus': None,
     #                                       'limit': 10,
     #                                       'page': 1
     #                                   }
-    #     self.logger.info("查询请求数据：" + str(search_data))
-    #     search_res = requests.request(method='post', url=self.backend_host + '/finance/subjectClassification/listPage',
+    #     self.logger.info("查询请求数据：" + str(add_search_data))
+    #     add_search_res = requests.request(method='post', url=self.backend_host + '/finance/subjectClassification/listPage',
     #                                   headers=self.backend_headers,
-    #                                   json=search_data)
-    #     search_result_json = search_res.json()
-    #     self.logger.info("查询响应数据：" + str(search_result_json))
-    #     assert search_result_json['code'] == 0
-    #     assert search_result_json['message'] == 'success'
-    #     assert search_result_json['data']['records'][0]['scStatus'] == 1
-    #     assert search_result_json['data']['records'][0]['scSort'] == add_success_data['data']['scSort']
-    #     assert search_result_json['data']['records'][0]['scName'] == add_success_data['data']['scName']
+    #                                   json=add_search_data)
+    #     add_search_result_json = add_search_res.json()
+    #     self.logger.info("查询响应数据：" + str(add_search_result_json))
+    #     assert add_search_result_json['code'] == 0
+    #     assert add_search_result_json['message'] == 'success'
+    #     assert add_search_result_json['data']['records'][0]['scStatus'] == 1
+    #     assert add_search_result_json['data']['records'][0]['scSort'] == add_success_data['data']['scSort']
+    #     assert add_search_result_json['data']['records'][0]['scName'] == add_success_data['data']['scName']
 
     def test_scene(self):
         add_data = {
@@ -60,33 +60,33 @@ class TestSubjectCategory(TestBase):
         add_result_json = self.sc.add(**add_data['data'])
         assert add_result_json['code'] == 0
 
-        search_data = {
+        add_search_data = {
             'scName': add_data['data']['scName'],
             'scSort': None,
             'scStatus': None
         }
-        search_result_json = self.sc.search(**search_data)
-        search_result_records = search_result_json['data']['records'][0]
-        assert search_result_records['scStatus'] == 1
-        assert search_result_records['scSort'] == add_data['data']['scSort']
-        assert search_result_records['scName'] == add_data['data']['scName']
+        add_search_result_json = self.sc.add_search(**add_search_data)
+        add_search_result_records = add_search_result_json['data']['records'][0]
+        assert add_search_result_records['scStatus'] == 1
+        assert add_search_result_records['scSort'] == add_data['data']['scSort']
+        assert add_search_result_records['scName'] == add_data['data']['scName']
 
-        add_log_data = {
-            'desc': '新增日志场景',
+        log_data = {
+            'desc': '日志场景',
             'data': {
-                'id': search_result_records['id'],
+                'id': add_search_result_records['id'],
             }
         }
-        self.logger.info("说明：" + str(add_log_data['desc']))
-        add_log_result_json = self.sc.log(**add_log_data['data'])
-        add_log_result_records = add_log_result_json['data']['records'][0]
-        assert add_log_result_records['businessId'] == add_log_data['data']['id']
-        assert '新增' in add_log_result_records['operationTypeName']
+        self.logger.info("说明：" + str(log_data['desc']))
+        log_result_json = self.sc.log(**log_data['data'])
+        log_result_records = log_result_json['data']['records'][0]
+        assert log_result_records['businessId'] == log_data['data']['id']
+        assert '新增' in log_result_records['operationTypeName']
 
         edit_data = {
             'desc': '编辑场景',
             'data': {
-                'id': search_result_records['id'],
+                'id': add_search_result_records['id'],
                 'scName': 'ye${random(5)}',
                 'scSort': 2,
                 'scStatus': None
@@ -106,14 +106,14 @@ class TestSubjectCategory(TestBase):
         add_result_json = self.sc.add(**add_success_data['data'])
         assert add_result_json['code'] == 0
         assert add_result_json['message'] == 'success'
-        search_data = {
+        add_search_data = {
             'scName': add_success_data['data']['scName'],
             'scSort': None,
             'scStatus': None
         }
-        search_result_json = self.sc.search(**search_data)
-        assert search_result_json['code'] == 0
-        assert search_result_json['message'] == 'success'
-        assert search_result_json['data']['records'][0]['scStatus'] == 1
-        assert search_result_json['data']['records'][0]['scSort'] == add_success_data['data']['scSort']
-        assert search_result_json['data']['records'][0]['scName'] == add_success_data['data']['scName']
+        add_search_result_json = self.sc.add_search(**add_search_data)
+        assert add_search_result_json['code'] == 0
+        assert add_search_result_json['message'] == 'success'
+        assert add_search_result_json['data']['records'][0]['scStatus'] == 1
+        assert add_search_result_json['data']['records'][0]['scSort'] == add_success_data['data']['scSort']
+        assert add_search_result_json['data']['records'][0]['scName'] == add_success_data['data']['scName']
