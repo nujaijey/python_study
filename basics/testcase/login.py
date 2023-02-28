@@ -27,13 +27,13 @@ class Login:
     }
 
     backend_login_data = {
-        "username": (None, "yejiajun"),
-        "password": (None, "123456"),
-        "APP_ID": (None, "1552274783265"),
-        "TIMESTAMP": (None, "20230212151345"),
-        "SIGN_TYPE": (None, "SHA256"),
-        "NONCE": (None, "j5jwcb38gb"),
-        "SIGN": (None, "9D4CE0D9F3345667EDB6573B16BFF6F08B53465019554B8AA9D89191D183C77C")
+        "username": "yejiajun",
+        "password": "123456",
+        "APP_ID": "1552274783265",
+        "TIMESTAMP": "20230212151345",
+        "SIGN_TYPE": "SHA256",
+        "NONCE": "j5jwcb38gb",
+        "SIGN": "9D4CE0D9F3345667EDB6573B16BFF6F08B53465019554B8AA9D89191D183C77C"
     }
 
     def __init__(self):
@@ -56,11 +56,12 @@ class Login:
         self.logger.info("后台登录请求数据：" + str(self.backend_login_data))
         res = requests.request(method='post',
                                url=requests_config['backend_host'] + '/user/admin/login/token',
-                               files=self.backend_login_data)
+                               data=self.backend_login_data)
         result_json = res.json()
         self.logger.info("后台登录响应数据：" + str(result_json))
         access_token = result_json['data']['access_token']
         return {
+            'content-type': 'application/x-www-form-urlencoded',
             'cookie': 'token=' + access_token,
             'authorization': 'Bearer ' + access_token
         }

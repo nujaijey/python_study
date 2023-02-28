@@ -32,7 +32,7 @@ class SubjectCategory(ApiBase):
         }
         return self.req(**request_data)
 
-    def search(self, scName, scSort, scStatus, limit=10, page=1):
+    def search(self, scName, scSort=None, scStatus=None, limit=10, page=1):
         request_data = {
             'method': 'post',
             'url': self.backend_host + '/finance/subjectClassification/listPage',
@@ -62,12 +62,14 @@ class SubjectCategory(ApiBase):
         return self.req(**request_data)
 
     def log(self, id):
+        self.backend_headers['content-type'] = 'application/x-www-form-urlencoded'
         request_data = {
             'method': 'post',
             'url': self.backend_host + '/elastic/log/listLogById',
             'headers': self.backend_headers,
-            'json': {
-                'id': id
+            'data': {
+                'id': id,
+                'index': 'salary_subject_classification_log'
             }
         }
         return self.req(**request_data)
