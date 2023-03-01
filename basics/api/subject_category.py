@@ -62,7 +62,6 @@ class SubjectCategory(ApiBase):
         return self.req(**request_data)
 
     def log(self, id):
-        self.backend_headers['content-type'] = 'application/x-www-form-urlencoded'
         request_data = {
             'method': 'post',
             'url': self.backend_host + '/elastic/log/listLogById',
@@ -70,6 +69,18 @@ class SubjectCategory(ApiBase):
             'data': {
                 'id': id,
                 'index': 'salary_subject_classification_log'
+            }
+        }
+        return self.req(**request_data)
+
+    def update_status(self, id, status):
+        request_data = {
+            'method': 'get',
+            'url': self.backend_host + '/finance/subjectClassification/updateStatus',
+            'headers': self.backend_headers,
+            'data': {
+                'id': id,
+                'status': status
             }
         }
         return self.req(**request_data)

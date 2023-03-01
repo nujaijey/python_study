@@ -61,7 +61,6 @@ class Login:
         self.logger.info("后台登录响应数据：" + str(result_json))
         access_token = result_json['data']['access_token']
         return {
-            'content-type': 'application/x-www-form-urlencoded',
             'cookie': 'token=' + access_token,
             'authorization': 'Bearer ' + access_token
         }
